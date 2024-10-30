@@ -302,7 +302,9 @@ func (c *Connection) configureSudo() {
 		if c.Exec(`doas -n -- "${SHELL-sh}" -c true`) == nil {
 			// user has passwordless doas
 			c.sudofunc = sudoDoas
+			return
 		}
+		c.sudofunc = sudoSudo
 		return
 	}
 
